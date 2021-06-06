@@ -2,9 +2,35 @@
 <html lang="en" dir="ltr">
     <head>
         <meta charset="utf-8">
-        <title></title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Poem Stream</title>
+        <script src="src/poem.js" charset="utf-8"></script>
+        <script src="src/index.js" charset="utf-8"></script>
     </head>
     <body>
-        
+        <div class="form-container">
+            <form id="write-poem">
+                <h3>Write a Poem</h3>
+
+                <input id='input-title' type="text" name="title" value="" placeholder="Enter Poem name" class="input-text">
+                <br><br>
+                <textarea id='input-lines' type="text" name="lines" value="" placeholder="Enter Poem Stanzas" rows="8" cols="80"></textarea>
+                <br><br>
+
+                <label>Genres: <select id="genres" name="genres">
+                    <option value="1">Anger</option>
+                    <option value="2">Sad</option>
+                    <option value="3">Happy</option>
+                    <option value="4">Despair</option>
+                </select></label><br><br>
+
+                <input id='compose-button' type="submit" name="compose" value="Write Poem" class="submit">
+            </form>
+        </div>
+        <br><br>
+        <h3>*******************************************************************************</h3>
+        <div id="poem-container">
+
+        </div>
     </body>
 </html>
