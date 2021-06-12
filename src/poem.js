@@ -12,9 +12,8 @@ class Poem {
             <div data-id=${this.id}>
                 <h3>Poem Title: ${this.title}</h3>
                 <p>Poem Genre: ${this.genre.name}</p>
-            </div>
-            <br><br>`;
-    
+                <p>${this.lines}</p>
+            </div><br>`;
     }
 }
 
