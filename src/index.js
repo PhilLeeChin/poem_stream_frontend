@@ -5,10 +5,9 @@ document.addEventListener('DOMContentLoaded', () => {
     getPoem()
 
     const writePoemForm = document.querySelector("#write-poem")
-    // const deletePoem = document.querySelector("#poem-container")
 
     writePoemForm.addEventListener("submit", (e) => createFormHandler(e))
-    // deletePoem.removeEventListener("remove", (r) => deletePoemHandler(r))
+
 })
 
 function getPoem() {
@@ -18,10 +17,22 @@ function getPoem() {
         // console.log(poem);
         poem.data.forEach(poem => {
             let newPoem = new Poem(poem, poem.attributes)
-
             document.querySelector('#poem-container').innerHTML += newPoem.renderPoemCard();
             // render(poem)
         })
+        
+    })
+    .then(( ) => {
+        // debugger
+        const deleteOldPoem = document.querySelectorAll(".delete-button")
+        console.log(deleteOldPoem);
+        
+        deleteOldPoem.forEach(poem => {
+            poem.addEventListener("click", (r) => deletePoem(r))
+        })
+        // for (let i = 0; i < deleteOldPoem.length; i++) {
+        //     deleteOldPoem[i].addEventListener("click", (r) => deletePoem(r))
+        // }
     })
 }
 
@@ -37,7 +48,7 @@ function createFormHandler(e) {
 
 function postFetch(title, lines, genre_id) {
     const bodyData = {title, lines, genre_id}
-
+    debugger
     fetch(poemURL, {
         method: "POST",
         headers: {"Content-Type": "application/json"},
@@ -48,31 +59,25 @@ function postFetch(title, lines, genre_id) {
         console.log(poem);
         const poemData = poem.data
         let newPoem = new Poem(poemData, poem.attributes)
-
+        debugger
         document.querySelector('#poem-container').innerHTML += newPoem.renderPoemCard();
     })
 }
 
-// function deletePoem(r) {
-//     const id = r.target.dataset.id;
-//     fetch(`http://localhost:3000/api/poems/${id}`, {
-//         method: "DELETE",  
-//     })
-//     .then(response => response.json())
-//     .then( data => {
-//         console.log('hello');
-//        const deletedPoemArr = Poem.all.filter(poem => poem.id != data.id)
+function deletePoem(r) {
+    const id = r.target.dataset.id;
+    // debugger
+    fetch(`http://localhost:3000/api/poems/${id}`, {
+        method: "DELETE",  
+    })
+    .then(response => response.json())
+    .then( data => {
+        // console.log('hello');
+        const deletedPoemArr = Poem.all.filter(poem => poem.id != data.id)
              
-//            document.getElementById('#poem-container').innerHTML = "";
-//              deletedPoemArr.forEach(filteredPoem => {
-//                document.getElementById('#poem-container').innerHTML += filteredPoem.renderPoemCard();
-//              })
-       
- 
-//         //instead of just removing the html in line 92
-//         //to delete you need to:
-//          //filter the deleted recipe out of Recipe.all (by id)
-//          // clear the html of all existing recipes
-//          //iterate over newly filtered Recipe.all and rerender all recipes
-//     })
-//    }
+            document.getElementById('poem-container').innerHTML = "";
+            deletedPoemArr.forEach(filteredPoem => {
+            document.getElementById('poem-container').innerHTML += filteredPoem.renderPoemCard();
+            })
+    })
+}

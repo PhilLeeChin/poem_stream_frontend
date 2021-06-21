@@ -13,6 +13,7 @@ class Poem {
                 <h3>Poem Title: ${this.title}</h3>
                 <p>Poem Genre: ${this.genre.name}</p>
                 <p>${this.lines}</p>
+                <button data-id=${this.id} type="button" class="delete-button">Delete</button> 
             </div><br>`;
     }
 }
